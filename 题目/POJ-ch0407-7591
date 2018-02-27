@@ -1,0 +1,39 @@
+const
+	MAX=1000;
+	MAX_IN=20000;
+var
+	mullist:array[1..MAX]of integer;
+	countlist:array[1..MAX_IN]of integer;
+	m,n:longint;
+function mul(n:integer):longint;
+	var
+		i:integer;
+		mulans:longint;
+	begin
+		mulans:=mullist[1];
+		for i:=2 to n do mulans:=mulans*(mullist[i]+1);
+		exit(mulans);
+	end;
+
+function g(x:longint):longint;
+	var
+		count,i:integer;
+		tmp:longint;
+	begin
+		i:=2;
+		count:=1;
+		while i<=tmp do
+			if (tmp mod i)=0 then begin
+				tmp:=tmp div i;
+				inc(mullist[count]);
+			end else begin
+				if mullist[count]<>0 then inc(count);
+				inc(i);
+			end;
+		exit(mul(count));
+	end;
+
+begin
+	readln(m);
+	writeln(g(m));
+end.

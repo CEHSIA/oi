@@ -1,0 +1,35 @@
+var a:array[1..100000]of longint;
+	i,n:longint;
+procedure swap(var a,b:longint);
+	var k:longint;
+	begin
+		k:=a;
+		a:=b;
+		b:=k;
+	end;
+procedure qsort(l,r:longint);
+	var i,j,k:longint;
+	begin
+		if l>r then exit;
+		i:=l;
+		j:=r;
+		k:=l;
+		while i<>j do begin
+			while (i<j)and(a[j]>=a[k]) do
+				j:=j-1;
+			while (i<j)and(a[i]<=a[k]) do
+				i:=i+1;
+			if i<j then swap(a[i],a[j]);
+		end;
+		swap(a[k],a[i]);
+		qsort(l,i-1);
+		qsort(i+1,r);
+	end;
+begin
+	readln(n);
+	for i:=1 to n do 
+		read(a[i]);
+	 qsort(1,n);
+	for i:=1 to n do
+		write(a[i],' ');
+end.
